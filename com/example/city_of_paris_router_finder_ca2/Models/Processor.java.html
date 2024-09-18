@@ -1,0 +1,154 @@
+<html>
+<head>
+<title>Processor.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #2aacb8;}
+.s5 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Processor.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">city_of_paris_router_finder_ca2</span><span class="s2">.</span><span class="s1">Models</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">Image</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">PixelReader</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">PixelWriter</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">WritableImage</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">paint</span><span class="s2">.</span><span class="s1">Color</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Processor </span><span class="s2">{</span>
+
+    <span class="s3">//Makes a version of the image but in black and white where white is the &quot;road&quot; pixels that are bright enough to be the road</span>
+    <span class="s0">public static </span><span class="s1">Image convertToBW</span><span class="s2">(</span><span class="s1">Image image</span><span class="s2">, </span><span class="s0">double </span><span class="s1">threshold</span><span class="s2">) {</span>
+        <span class="s1">PixelReader pixelReader </span><span class="s2">= </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getPixelReader</span><span class="s2">();</span>
+        <span class="s0">int </span><span class="s1">width </span><span class="s2">= (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">();</span>
+        <span class="s0">int </span><span class="s1">height </span><span class="s2">= (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getHeight</span><span class="s2">();</span>
+
+        <span class="s1">WritableImage bw </span><span class="s2">= </span><span class="s0">new </span><span class="s1">WritableImage</span><span class="s2">(</span><span class="s1">width</span><span class="s2">, </span><span class="s1">height</span><span class="s2">);</span>
+        <span class="s1">PixelWriter pixelWriter </span><span class="s2">= </span><span class="s1">bw</span><span class="s2">.</span><span class="s1">getPixelWriter</span><span class="s2">();</span>
+        <span class="s3">// Go through each pixel of the image</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">y </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">y </span><span class="s2">&lt; </span><span class="s1">height</span><span class="s2">; </span><span class="s1">y</span><span class="s2">++) {</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">x </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">x </span><span class="s2">&lt; </span><span class="s1">width</span><span class="s2">; </span><span class="s1">x</span><span class="s2">++) {</span>
+                <span class="s3">//Get the colour of each pixel</span>
+                <span class="s1">Color c </span><span class="s2">= </span><span class="s1">pixelReader</span><span class="s2">.</span><span class="s1">getColor</span><span class="s2">(</span><span class="s1">x</span><span class="s2">, </span><span class="s1">y</span><span class="s2">);</span>
+                <span class="s0">double </span><span class="s1">sum </span><span class="s2">= </span><span class="s1">c</span><span class="s2">.</span><span class="s1">getRed</span><span class="s2">() + </span><span class="s1">c</span><span class="s2">.</span><span class="s1">getGreen</span><span class="s2">() + </span><span class="s1">c</span><span class="s2">.</span><span class="s1">getBlue</span><span class="s2">();</span>
+                <span class="s3">// if greater than the threshold it must be white or close to it and must be part of the road</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">sum </span><span class="s2">&gt; </span><span class="s1">threshold</span><span class="s2">) {</span>
+                    <span class="s1">pixelWriter</span><span class="s2">.</span><span class="s1">setColor</span><span class="s2">(</span><span class="s1">x</span><span class="s2">, </span><span class="s1">y</span><span class="s2">, </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">WHITE</span><span class="s2">);</span>
+                <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                    <span class="s1">pixelWriter</span><span class="s2">.</span><span class="s1">setColor</span><span class="s2">(</span><span class="s1">x</span><span class="s2">, </span><span class="s1">y</span><span class="s2">, </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">BLACK</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">bw</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">//Creates an array of nodes from the bwImage</span>
+    <span class="s0">public static </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">Color</span><span class="s2">&gt;[] </span><span class="s1">createNodesFromBW</span><span class="s2">(</span><span class="s1">Image image</span><span class="s2">) {</span>
+
+        <span class="s3">//Every pixel gets a node, but we only want white nodes co black remain null;</span>
+        <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">Color</span><span class="s2">&gt;[] </span><span class="s1">nodes </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GraphNodeAL</span><span class="s2">[(</span><span class="s0">int</span><span class="s2">) (</span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">() * </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getHeight</span><span class="s2">())];</span>
+
+        <span class="s1">PixelReader pixelReader </span><span class="s2">= </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getPixelReader</span><span class="s2">();</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">y </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">y </span><span class="s2">&lt; </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getHeight</span><span class="s2">(); </span><span class="s1">y</span><span class="s2">++) {</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">x </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">x </span><span class="s2">&lt; </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">(); </span><span class="s1">x</span><span class="s2">++) {</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">pixelReader</span><span class="s2">.</span><span class="s1">getColor</span><span class="s2">(</span><span class="s1">x</span><span class="s2">, </span><span class="s1">y</span><span class="s2">).</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">BLACK</span><span class="s2">)) {</span>
+                    <span class="s0">continue</span><span class="s2">;</span>
+                <span class="s2">}</span>
+                <span class="s3">//Create node</span>
+                <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">Color</span><span class="s2">&gt; </span><span class="s1">node </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;&gt;(</span><span class="s5">&quot;PATH@&quot; </span><span class="s2">+ </span><span class="s1">x </span><span class="s2">+ </span><span class="s5">&quot;:&quot; </span><span class="s2">+ </span><span class="s1">y</span><span class="s2">, </span><span class="s1">x</span><span class="s2">, </span><span class="s1">y</span><span class="s2">);</span>
+                <span class="s3">//give the node its colour</span>
+                <span class="s1">node</span><span class="s2">.</span><span class="s1">setData</span><span class="s2">(</span><span class="s1">pixelReader</span><span class="s2">.</span><span class="s1">getColor</span><span class="s2">(</span><span class="s1">node</span><span class="s2">.</span><span class="s1">getX</span><span class="s2">(), </span><span class="s1">node</span><span class="s2">.</span><span class="s1">getY</span><span class="s2">()));</span>
+
+                <span class="s3">//setting the correct node in the array to the new node</span>
+                <span class="s1">nodes</span><span class="s2">[(</span><span class="s0">int</span><span class="s2">) ((</span><span class="s1">y </span><span class="s2">* </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">() + </span><span class="s1">x</span><span class="s2">))] = </span><span class="s1">node</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">createNodesFromImage</span><span class="s2">(</span><span class="s1">image</span><span class="s2">, </span><span class="s1">nodes</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Adds edges to each node based on their position</span>
+    <span class="s0">private static </span><span class="s1">GraphNodeAL</span><span class="s2">[] </span><span class="s1">createNodesFromImage</span><span class="s2">(</span><span class="s1">Image image</span><span class="s2">, </span><span class="s1">GraphNodeAL</span><span class="s2">[] </span><span class="s1">nodes</span><span class="s2">) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">nodes</span><span class="s2">.</span><span class="s1">length</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+
+            <span class="s3">// If the node is null / black ignore it</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">nodes</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] == </span><span class="s0">null</span><span class="s2">) {</span>
+                <span class="s0">continue</span><span class="s2">;</span>
+            <span class="s2">}</span>
+
+            <span class="s3">//Check for a node to the right</span>
+            <span class="s0">if </span><span class="s2">((</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s2">) % (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">() != </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1 </span><span class="s2">&lt; </span><span class="s1">nodes</span><span class="s2">.</span><span class="s1">length</span><span class="s2">) {</span>
+                    <span class="s0">if </span><span class="s2">(</span><span class="s1">nodes</span><span class="s2">[</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s2">] != </span><span class="s0">null</span><span class="s2">) {</span>
+                        <span class="s1">nodes</span><span class="s2">[</span><span class="s1">i</span><span class="s2">].</span><span class="s1">connectToNodeUndirected</span><span class="s2">(</span><span class="s1">nodes</span><span class="s2">[</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s2">], </span><span class="s4">1</span><span class="s2">);</span>
+                    <span class="s2">}</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+            <span class="s3">//Check for a node below</span>
+            <span class="s0">if </span><span class="s2">(!(</span><span class="s1">i </span><span class="s2">+ </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">() &gt;= </span><span class="s1">nodes</span><span class="s2">.</span><span class="s1">length</span><span class="s2">)) {</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">nodes</span><span class="s2">[</span><span class="s1">i </span><span class="s2">+ (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">()] != </span><span class="s0">null</span><span class="s2">) {</span>
+                    <span class="s1">nodes</span><span class="s2">[</span><span class="s1">i</span><span class="s2">].</span><span class="s1">connectToNodeUndirected</span><span class="s2">(</span><span class="s1">nodes</span><span class="s2">[</span><span class="s1">i </span><span class="s2">+ (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">()], </span><span class="s4">1</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">nodes</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+
+    <span class="s3">//Return the node at the clicked location</span>
+    <span class="s0">public static </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">Color</span><span class="s2">&gt; </span><span class="s1">getNodesOnMouseClick</span><span class="s2">(</span><span class="s1">Image image</span><span class="s2">, </span><span class="s0">int </span><span class="s1">x</span><span class="s2">, </span><span class="s0">int </span><span class="s1">y</span><span class="s2">, </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">Color</span><span class="s2">&gt;[] </span><span class="s1">nodes</span><span class="s2">) {</span>
+
+        <span class="s0">return </span><span class="s1">nodes</span><span class="s2">[(</span><span class="s0">int</span><span class="s2">) ((</span><span class="s1">y </span><span class="s2">* </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">() + </span><span class="s1">x</span><span class="s2">))];</span>
+    <span class="s2">}</span>
+
+
+    <span class="s3">//Draws the pixels along the route on the image int a multi colour</span>
+    <span class="s0">public static </span><span class="s1">Image drawRoute</span><span class="s2">(</span><span class="s1">Image image</span><span class="s2">, </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;?&gt;&gt; </span><span class="s1">nodeRoute</span><span class="s2">) {</span>
+        <span class="s1">WritableImage writableImage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">WritableImage</span><span class="s2">(</span><span class="s1">image</span><span class="s2">.</span><span class="s1">getPixelReader</span><span class="s2">(), (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">(), (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getHeight</span><span class="s2">());</span>
+        <span class="s1">PixelWriter pixelWriter </span><span class="s2">= </span><span class="s1">writableImage</span><span class="s2">.</span><span class="s1">getPixelWriter</span><span class="s2">();</span>
+
+            <span class="s1">Color color </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">RED</span><span class="s2">;</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">GraphNodeAL node </span><span class="s2">: </span><span class="s1">nodeRoute</span><span class="s2">) {</span>
+                <span class="s1">color </span><span class="s2">= </span><span class="s1">color</span><span class="s2">.</span><span class="s1">deriveColor</span><span class="s2">(</span><span class="s4">1</span><span class="s2">, </span><span class="s4">1</span><span class="s2">, </span><span class="s4">1</span><span class="s2">, </span><span class="s4">1</span><span class="s2">);</span>
+                <span class="s1">pixelWriter</span><span class="s2">.</span><span class="s1">setColor</span><span class="s2">(</span><span class="s1">node</span><span class="s2">.</span><span class="s1">getX</span><span class="s2">(), </span><span class="s1">node</span><span class="s2">.</span><span class="s1">getY</span><span class="s2">(),</span><span class="s1">color </span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+        <span class="s0">return </span><span class="s1">writableImage</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">//Gets the cost of the route only needed for Dijkstra's algorithm if we wanted to find the cost</span>
+    <span class="s0">public static int </span><span class="s1">getCostOfRoute</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;?&gt;&gt; </span><span class="s1">route</span><span class="s2">){</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">route</span><span class="s2">.</span><span class="s1">size</span><span class="s2">() &lt;= </span><span class="s4">1</span><span class="s2">){</span>
+            <span class="s0">return </span><span class="s4">0</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">int </span><span class="s1">cost </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">route</span><span class="s2">.</span><span class="s1">size</span><span class="s2">() - </span><span class="s4">1</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++){</span>
+            <span class="s1">GraphNodeAL</span><span class="s2">&lt;?&gt; </span><span class="s1">current </span><span class="s2">= </span><span class="s1">route</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+            <span class="s1">GraphNodeAL</span><span class="s2">&lt;?&gt; </span><span class="s1">next </span><span class="s2">= </span><span class="s1">route</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s2">);</span>
+
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">GraphEdge edge </span><span class="s2">: </span><span class="s1">current</span><span class="s2">.</span><span class="s1">getAdjList</span><span class="s2">()){</span>
+                <span class="s0">if</span><span class="s2">(</span><span class="s1">edge</span><span class="s2">.</span><span class="s1">getDestinationNode</span><span class="s2">().</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">next</span><span class="s2">));</span>
+                <span class="s1">cost </span><span class="s2">+= </span><span class="s1">edge</span><span class="s2">.</span><span class="s1">getCost</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">cost</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+
+
+</pre>
+</body>
+</html>

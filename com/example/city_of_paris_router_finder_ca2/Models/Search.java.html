@@ -1,0 +1,211 @@
+<html>
+<head>
+<title>Search.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Search.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">city_of_paris_router_finder_ca2</span><span class="s2">.</span><span class="s1">Models</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">paint</span><span class="s2">.</span><span class="s1">Color</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.*;</span>
+
+<span class="s0">public class </span><span class="s1">Search </span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; {</span>
+
+    <span class="s3">// Starting Node</span>
+    <span class="s0">private </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">start</span><span class="s2">;</span>
+
+    <span class="s3">//Ending node</span>
+    <span class="s0">private </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">end</span><span class="s2">;</span>
+
+    <span class="s3">//The Route from Start to End</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">route</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">Search</span><span class="s2">(</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">start</span><span class="s2">, </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">end</span><span class="s2">){</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">start </span><span class="s2">= </span><span class="s1">start</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">end </span><span class="s2">= </span><span class="s1">end</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">//Getters and Setters</span>
+    <span class="s0">public </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">getStart</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">start</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setStart</span><span class="s2">(</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">start</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">start </span><span class="s2">= </span><span class="s1">start</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">getEnd</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">end</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setEnd</span><span class="s2">(</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">end</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">end </span><span class="s2">= </span><span class="s1">end</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">getRoute</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">route</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setRoute</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">route</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">route </span><span class="s2">= </span><span class="s1">route</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">//BFS Algorithm from start to end</span>
+    <span class="s0">public void </span><span class="s1">BFS</span><span class="s2">(){</span>
+
+        <span class="s3">//if there isn't a start or end stop</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">start </span><span class="s2">== </span><span class="s0">null </span><span class="s2">|| </span><span class="s1">end </span><span class="s2">== </span><span class="s0">null</span><span class="s2">){</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s3">//Generating the Queue, Visited and Previous</span>
+        <span class="s1">Queue</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">queue </span><span class="s2">= </span><span class="s0">new </span><span class="s1">LinkedList</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s1">Set</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">visited </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HashSet</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s1">Map</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;, </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">previous </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HashMap</span><span class="s2">&lt;&gt;();</span>
+
+
+        <span class="s1">queue</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">start</span><span class="s2">);</span>
+
+        <span class="s0">while </span><span class="s2">(!</span><span class="s1">queue</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()){</span>
+
+            <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">current </span><span class="s2">= </span><span class="s1">queue</span><span class="s2">.</span><span class="s1">poll</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">current</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">end</span><span class="s2">)){</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+
+            <span class="s3">//Go through all edges and add the node that is next to the queue and makes it visited and added to the Previous Map</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">GraphEdge edge </span><span class="s2">: </span><span class="s1">current</span><span class="s2">.</span><span class="s1">getAdjList</span><span class="s2">()){</span>
+                <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">next </span><span class="s2">= (</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;) </span><span class="s1">edge</span><span class="s2">.</span><span class="s1">getDestinationNode</span><span class="s2">();</span>
+                <span class="s0">if</span><span class="s2">(!</span><span class="s1">visited</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s1">next</span><span class="s2">)){</span>
+                    <span class="s1">visited</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">next</span><span class="s2">);</span>
+                    <span class="s1">queue</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">next</span><span class="s2">);</span>
+                    <span class="s1">previous</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s1">next</span><span class="s2">, </span><span class="s1">current</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s3">//Sets the route</span>
+        <span class="s1">route </span><span class="s2">= </span><span class="s1">getNodeListFromMap</span><span class="s2">(</span><span class="s1">previous</span><span class="s2">, </span><span class="s1">start</span><span class="s2">, </span><span class="s1">end</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">Dijkstra</span><span class="s2">(</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;[] </span><span class="s1">graph</span><span class="s2">){</span>
+
+
+        <span class="s3">//Generating the Queue, Visited and Previous</span>
+        <span class="s1">Queue</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">queue </span><span class="s2">= </span><span class="s0">new </span><span class="s1">LinkedList</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s1">Map</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;, </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">previous </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HashMap</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s1">Map</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;, </span><span class="s1">Integer</span><span class="s2">&gt; </span><span class="s1">cost </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HashMap</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">node </span><span class="s2">: </span><span class="s1">graph</span><span class="s2">){</span>
+            <span class="s1">cost</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s1">node</span><span class="s2">, </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">MAX_VALUE</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s1">cost</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s1">start</span><span class="s2">,</span><span class="s4">0</span><span class="s2">);</span>
+
+        <span class="s1">queue</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">start</span><span class="s2">);</span>
+
+        <span class="s0">while </span><span class="s2">(</span><span class="s1">queue</span><span class="s2">.</span><span class="s1">size</span><span class="s2">() != </span><span class="s4">0</span><span class="s2">){</span>
+
+            <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">current </span><span class="s2">= </span><span class="s1">queue</span><span class="s2">.</span><span class="s1">poll</span><span class="s2">();</span>
+
+            <span class="s3">// Go through each edge</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">GraphEdge edge </span><span class="s2">: </span><span class="s1">current</span><span class="s2">.</span><span class="s1">getAdjList</span><span class="s2">()){</span>
+
+                <span class="s1">GraphNodeAL next </span><span class="s2">= </span><span class="s1">edge</span><span class="s2">.</span><span class="s1">getDestinationNode</span><span class="s2">();</span>
+
+                <span class="s0">int </span><span class="s1">nextCost </span><span class="s2">= </span><span class="s1">edge</span><span class="s2">.</span><span class="s1">getCost</span><span class="s2">();</span>
+
+                <span class="s3">//if the cost from the current + cost is less then the route we take then update</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">cost</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">current</span><span class="s2">) + </span><span class="s1">nextCost </span><span class="s2">&lt; </span><span class="s1">cost</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">next</span><span class="s2">)){</span>
+                    <span class="s1">cost</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s1">next</span><span class="s2">, </span><span class="s1">cost</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">current</span><span class="s2">) + </span><span class="s1">nextCost</span><span class="s2">);</span>
+
+                    <span class="s1">previous</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s1">next</span><span class="s2">, </span><span class="s1">current</span><span class="s2">);</span>
+
+                    <span class="s1">queue</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">next</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s3">// Sets the route</span>
+        <span class="s1">route </span><span class="s2">= </span><span class="s1">getNodeListFromMap</span><span class="s2">(</span><span class="s1">previous</span><span class="s2">, </span><span class="s1">start</span><span class="s2">, </span><span class="s1">end</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">DFS</span><span class="s2">(){</span>
+
+        <span class="s3">//if there isn't a start or end stop</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">start </span><span class="s2">== </span><span class="s0">null </span><span class="s2">|| </span><span class="s1">end </span><span class="s2">== </span><span class="s0">null</span><span class="s2">){</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s3">//Generating the Stack, Visited and Previous</span>
+        <span class="s1">Stack</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">stack </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stack</span><span class="s2">&lt;&gt;();</span>
+        <span class="s1">Set</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">visited </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HashSet</span><span class="s2">&lt;&gt;();</span>
+        <span class="s1">Map</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;, </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">previous </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HashMap</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s1">stack</span><span class="s2">.</span><span class="s1">push</span><span class="s2">(</span><span class="s1">start</span><span class="s2">);</span>
+
+        <span class="s0">while </span><span class="s2">(!</span><span class="s1">stack</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">current </span><span class="s2">= </span><span class="s1">stack</span><span class="s2">.</span><span class="s1">pop</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">current</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">end</span><span class="s2">)) {</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+
+            <span class="s0">if </span><span class="s2">(!</span><span class="s1">visited</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s1">current</span><span class="s2">)) {</span>
+                <span class="s1">visited</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">current</span><span class="s2">);</span>
+
+                <span class="s3">//Go through each edge</span>
+                <span class="s0">for </span><span class="s2">(</span><span class="s1">GraphEdge edge </span><span class="s2">: </span><span class="s1">current</span><span class="s2">.</span><span class="s1">getAdjList</span><span class="s2">()){</span>
+                    <span class="s1">GraphNodeAL next </span><span class="s2">= </span><span class="s1">edge</span><span class="s2">.</span><span class="s1">getDestinationNode</span><span class="s2">();</span>
+                    <span class="s3">//if haven't visited add it to being visited</span>
+                    <span class="s0">if</span><span class="s2">(!</span><span class="s1">visited</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s1">next</span><span class="s2">)){</span>
+                        <span class="s1">stack</span><span class="s2">.</span><span class="s1">push</span><span class="s2">(</span><span class="s1">next</span><span class="s2">);</span>
+                        <span class="s1">previous</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s1">next</span><span class="s2">, </span><span class="s1">current</span><span class="s2">);</span>
+                    <span class="s2">}</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s3">// Sets the route</span>
+        <span class="s1">route </span><span class="s2">= </span><span class="s1">getNodeListFromMap</span><span class="s2">(</span><span class="s1">previous</span><span class="s2">, </span><span class="s1">start</span><span class="s2">, </span><span class="s1">end</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Makes a list of nodes based of the start and end with the map of the bfs</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">getNodeListFromMap</span><span class="s2">(</span><span class="s1">Map</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;, </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">map</span><span class="s2">, </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">start</span><span class="s2">, </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">end</span><span class="s2">){</span>
+        <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">currentNode </span><span class="s2">= </span><span class="s1">end</span><span class="s2">;</span>
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;&gt; </span><span class="s1">nodeList </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+        <span class="s0">while </span><span class="s2">(!</span><span class="s1">currentNode</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">start</span><span class="s2">)){</span>
+            <span class="s1">nodeList</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">currentNode</span><span class="s2">);</span>
+            <span class="s1">currentNode </span><span class="s2">= </span><span class="s1">map</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">currentNode</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">nodeList</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Adds routes that are to be taken and puts them into a single route in order</span>
+    <span class="s0">public static </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;?&gt;&gt; </span><span class="s1">addNodePaths</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">Color</span><span class="s2">&gt;&gt;&gt; </span><span class="s1">routes</span><span class="s2">){</span>
+
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;?&gt;&gt; </span><span class="s1">finalRoute </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;(</span><span class="s1">routes</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s4">0</span><span class="s2">));</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s4">1</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">routes</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++){</span>
+            <span class="s1">finalRoute</span><span class="s2">.</span><span class="s1">addAll</span><span class="s2">(</span><span class="s1">routes</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">));</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">finalRoute</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

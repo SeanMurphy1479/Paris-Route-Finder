@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="702.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.city_of_paris_router_finder_ca2.MenuController">
+   <ImageView cache="true" fitHeight="679.0" fitWidth="1400.0" layoutY="125.0" pickOnBounds="true">
+      <image>
+         <Image url="@../../../ParisGround/France_Houses_Roads_Autumn_Paris_Street_536534_1920x1080.jpg" />
+      </image>
+   </ImageView>
+   <Rectangle arcHeight="5.0" arcWidth="5.0" height="104.0" stroke="BLACK" strokeType="INSIDE" width="1400.0">
+      <fill>
+         <LinearGradient endX="1.0" endY="1.0" startX="0.3222748815165877" startY="0.9478672985781991">
+            <stops>
+               <Stop>
+                  <color>
+                     <Color red="0.23137255012989044" green="0.29019609093666077" blue="0.7372549176216125" />
+                  </color>
+               </Stop>
+               <Stop offset="0.007662835249042145">
+                  <color>
+                     <Color red="0.23137255012989044" green="0.29019609093666077" blue="0.7372549176216125" />
+                  </color>
+               </Stop>
+               <Stop offset="0.007662835249042145">
+                  <color>
+                     <Color red="0.23360000550746918" green="0.2915133237838745" blue="0.7300000190734863" />
+                  </color>
+               </Stop>
+               <Stop offset="0.2577319587628865">
+                  <color>
+                     <Color green="0.6375299692153931" blue="1.0" opacity="0.0" />
+                  </color>
+               </Stop>
+               <Stop offset="1.0">
+                  <color>
+                     <Color red="0.5526315569877625" />
+                  </color>
+               </Stop>
+            </stops>
+         </LinearGradient>
+      </fill></Rectangle>
+   <MenuBar layoutY="101.0" prefHeight="27.0" prefWidth="1400.0">
+      <menus>
+         <Menu mnemonicParsing="false" text="File">
+            <items>
+               <MenuItem mnemonicParsing="false" onAction="#openImage" text="Open" />
+            </items>
+         </Menu>
+         <Menu mnemonicParsing="false" text="Edit">
+            <items>
+               <MenuItem mnemonicParsing="false" onAction="#clear" text="Clear" />
+               <MenuItem mnemonicParsing="false" onAction="#addLandmarks" text="Landmarks" />
+            </items>
+         </Menu>
+         <Menu mnemonicParsing="false" text="Algorithm">
+            <items>
+               <MenuItem mnemonicParsing="false" onAction="#toggleBFS" text="BFS" />
+               <MenuItem mnemonicParsing="false" onAction="#toggleDFS" text="DFS" />
+               <MenuItem mnemonicParsing="false" onAction="#toggleDijkstra" text="Dijkstra" />
+            </items>
+         </Menu>
+         <Menu mnemonicParsing="false" text="Exit">
+            <items>
+               <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
+            </items>
+         </Menu>
+      </menus>
+   </MenuBar>
+   <Label layoutX="156.0" layoutY="6.0" prefHeight="90.0" prefWidth="456.0" text="Paris Route Finder">
+      <font>
+         <Font name="Times New Roman" size="46.0" />
+      </font>
+   </Label>
+   <Pane layoutX="319.0" layoutY="128.0" prefHeight="594.0" prefWidth="742.0">
+           <children>
+   <ImageView fx:id="imageView" fitHeight="590.0" fitWidth="737.0" onMouseClicked="#imageClicked">
+
+      <image>
+         <Image requestedHeight="590.0" requestedWidth="737.0" url="@../../../Images/paris.png" />
+      </image>
+   </ImageView>
+           </children>
+   </Pane>
+   <ImageView fx:id="bw" fitHeight="90.0" fitWidth="136.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../../Images/download.png" />
+      </image>
+   </ImageView>
+   <VBox layoutX="14.0" layoutY="155.0" prefHeight="184.0" prefWidth="312.0">
+   <Label layoutX="180.0" layoutY="153.0" prefHeight="21.0" prefWidth="179.0" text="Street View of Paris">
+      <font>
+         <Font name="Times New Roman" size="15.0" />
+      </font>
+   </Label>
+   <Label layoutX="164.0" layoutY="174.0" text="Notable Landmarks include" />
+   <Label layoutX="205.0" layoutY="191.0" text="Effiel Tower" />
+   <Label layoutX="188.0" layoutY="208.0" prefHeight="17.0" prefWidth="154.0" text="Musee du Louvre" />
+   <Label layoutX="179.0" layoutY="225.0" prefHeight="17.0" prefWidth="156.0" text="Notre-Dame de Paris" />
+   <Label layoutX="193.0" layoutY="242.0" text="Arc de Tromphe" />
+   <Label layoutX="211.0" layoutY="259.0" text="Pantheon" />
+   <Label layoutX="194.0" layoutY="276.0" text="Sainte-Chapelle" />
+   <Label layoutX="200.0" layoutY="293.0" text="Palais Garnier" />
+   <Label layoutX="180.0" layoutY="310.0" text="Place de la Concorde" />
+   <Label layoutX="183.0" layoutY="327.0" prefHeight="17.0" prefWidth="149.0" text="Hotel des Invalides" />
+   </VBox>
+</AnchorPane>

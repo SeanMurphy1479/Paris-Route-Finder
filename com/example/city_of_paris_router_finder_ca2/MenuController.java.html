@@ -1,0 +1,262 @@
+<html>
+<head>
+<title>MenuController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #7a7e85;}
+.s5 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MenuController.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">city_of_paris_router_finder_ca2</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">city_of_paris_router_finder_ca2</span><span class="s2">.</span><span class="s1">Models</span><span class="s2">.</span><span class="s1">GraphNodeAL</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">city_of_paris_router_finder_ca2</span><span class="s2">.</span><span class="s1">Models</span><span class="s2">.</span><span class="s1">Processor</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">city_of_paris_router_finder_ca2</span><span class="s2">.</span><span class="s1">Models</span><span class="s2">.</span><span class="s1">Search</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXML</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">Image</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">ImageView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">input</span><span class="s2">.</span><span class="s1">MouseEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">Pane</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">paint</span><span class="s2">.</span><span class="s1">Color</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">shape</span><span class="s2">.</span><span class="s1">Circle</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">FileChooser</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">File</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">MenuController  </span><span class="s2">{</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ImageView imageView</span><span class="s2">, </span><span class="s1">bw</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">Image  image</span><span class="s2">, </span><span class="s1">original</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Integer</span><span class="s2">&gt; </span><span class="s1">points </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;(</span><span class="s3">4</span><span class="s2">);</span>
+
+
+
+    <span class="s4">//    //the method initializes an array of objects containing strings</span>
+    <span class="s1">@FXML </span><span class="s0">private </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt;[] </span><span class="s1">landmarks</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt;[] </span><span class="s1">initialize</span><span class="s2">(){</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">landmarks </span><span class="s2">= </span><span class="s1">loadLandmarks</span><span class="s2">();</span>
+            <span class="s0">return </span><span class="s1">landmarks</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">e</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">landmarks</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+
+    <span class="s1">@FXML</span>
+    <span class="s0">public void </span><span class="s1">openImage</span><span class="s2">() {</span>
+        <span class="s4">// The fileChooser chooses a new image</span>
+        <span class="s1">FileChooser fileChooser </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileChooser</span><span class="s2">();</span>
+        <span class="s4">//sets up a file chooser dialog for the user to select a file with .png</span>
+        <span class="s1">fileChooser</span><span class="s2">.</span><span class="s1">getExtensionFilters</span><span class="s2">().</span><span class="s1">addAll</span><span class="s2">(</span><span class="s0">new </span><span class="s1">FileChooser</span><span class="s2">.</span><span class="s1">ExtensionFilter</span><span class="s2">(</span><span class="s5">&quot;Image Files&quot;</span><span class="s2">, </span><span class="s5">&quot;*.png&quot;</span><span class="s2">));</span>
+
+        <span class="s1">File selectedFile </span><span class="s2">= </span><span class="s1">fileChooser</span><span class="s2">.</span><span class="s1">showOpenDialog</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s4">//checks if the user selected a file</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">selectedFile </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s4">//creates the image object using the URI of the file</span>
+            <span class="s1">image </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Image</span><span class="s2">(</span><span class="s1">selectedFile</span><span class="s2">.</span><span class="s1">toURI</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">());</span>
+            <span class="s4">//sets the imageView to the selected image</span>
+            <span class="s1">imageView</span><span class="s2">.</span><span class="s1">setImage</span><span class="s2">(</span><span class="s1">image</span><span class="s2">);</span>
+            <span class="s4">//stores the image for later</span>
+            <span class="s1">original </span><span class="s2">= </span><span class="s1">imageView</span><span class="s2">.</span><span class="s1">getImage</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">public void </span><span class="s1">imageClicked</span><span class="s2">(</span><span class="s1">MouseEvent e</span><span class="s2">){</span>
+        <span class="s4">//gets the coords of the mouse click</span>
+        <span class="s0">double </span><span class="s1">x </span><span class="s2">= </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getX</span><span class="s2">();</span>
+        <span class="s0">double </span><span class="s1">y </span><span class="s2">= </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getY</span><span class="s2">();</span>
+
+        <span class="s4">//calcs the coords of the mouse click relative to the size of the image</span>
+        <span class="s0">int </span><span class="s1">roundedX </span><span class="s2">= (</span><span class="s0">int</span><span class="s2">) (</span><span class="s1">x </span><span class="s2">/ </span><span class="s1">imageView</span><span class="s2">.</span><span class="s1">getBoundsInLocal</span><span class="s2">().</span><span class="s1">getWidth</span><span class="s2">() * </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">());</span>
+        <span class="s0">int </span><span class="s1">roundedY </span><span class="s2">= (</span><span class="s0">int</span><span class="s2">) (</span><span class="s1">y </span><span class="s2">/ </span><span class="s1">imageView</span><span class="s2">.</span><span class="s1">getBoundsInLocal</span><span class="s2">().</span><span class="s1">getHeight</span><span class="s2">() * </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getHeight</span><span class="s2">());</span>
+
+        <span class="s4">//checks if the clicked coords are in the bounds of the image</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">roundedX </span><span class="s2">&gt;= </span><span class="s3">0 </span><span class="s2">&amp;&amp; </span><span class="s1">roundedX </span><span class="s2">&lt; (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">() &amp;&amp; </span><span class="s1">roundedY </span><span class="s2">&gt;= </span><span class="s3">0 </span><span class="s2">&amp;&amp; </span><span class="s1">roundedY </span><span class="s2">&lt; (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">image</span><span class="s2">.</span><span class="s1">getHeight</span><span class="s2">()) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">points</span><span class="s2">.</span><span class="s1">size</span><span class="s2">() / </span><span class="s3">2 </span><span class="s2">&lt; </span><span class="s3">10</span><span class="s2">) {</span>
+                <span class="s4">//draws the circle at the coords of the clicked coords</span>
+                <span class="s1">drawCircle</span><span class="s2">((</span><span class="s0">int</span><span class="s2">) </span><span class="s1">x</span><span class="s2">, (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">y</span><span class="s2">);</span>
+
+                <span class="s4">//adds the coords to a list of points for later</span>
+                <span class="s1">points</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">roundedX</span><span class="s2">);</span>
+                <span class="s1">points</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">roundedY</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s4">//draws the red circle on the x,y coords</span>
+    <span class="s0">public void </span><span class="s1">drawCircle</span><span class="s2">(</span><span class="s0">int </span><span class="s1">x</span><span class="s2">, </span><span class="s0">int </span><span class="s1">y</span><span class="s2">){</span>
+        <span class="s1">Circle circle </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Circle</span><span class="s2">();</span>
+
+        <span class="s1">circle</span><span class="s2">.</span><span class="s1">setCenterX</span><span class="s2">(</span><span class="s1">x</span><span class="s2">);</span>
+        <span class="s1">circle</span><span class="s2">.</span><span class="s1">setCenterY</span><span class="s2">(</span><span class="s1">y</span><span class="s2">);</span>
+        <span class="s1">circle</span><span class="s2">.</span><span class="s1">setRadius</span><span class="s2">(</span><span class="s3">2.5</span><span class="s2">);</span>
+
+        <span class="s1">circle</span><span class="s2">.</span><span class="s1">setFill</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">RED</span><span class="s2">);</span>
+
+        <span class="s2">((</span><span class="s1">Pane</span><span class="s2">) </span><span class="s1">imageView</span><span class="s2">.</span><span class="s1">getParent</span><span class="s2">()).</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">circle</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s4">//clears all drawings</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">public void </span><span class="s1">clear</span><span class="s2">(){</span>
+        <span class="s2">((</span><span class="s1">Pane</span><span class="s2">) </span><span class="s1">imageView</span><span class="s2">.</span><span class="s1">getParent</span><span class="s2">()).</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">removeIf</span><span class="s2">(</span><span class="s1">c -&gt; c </span><span class="s0">instanceof </span><span class="s1">Circle</span><span class="s2">);</span>
+        <span class="s1">points </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;(</span><span class="s3">4</span><span class="s2">);</span>
+        <span class="s1">imageView</span><span class="s2">.</span><span class="s1">setImage</span><span class="s2">(</span><span class="s1">image</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">private boolean </span><span class="s1">useBFS </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+    <span class="s0">private boolean </span><span class="s1">useDFS </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+    <span class="s4">//enables the usage of the BFS calls from the other method</span>
+    <span class="s0">public void </span><span class="s1">toggleBFS</span><span class="s2">() {</span>
+        <span class="s1">useBFS </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+        <span class="s1">useDFS </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+        <span class="s1">findPathBetweenPoints</span><span class="s2">();</span>
+
+    <span class="s2">}</span>
+    <span class="s4">//enables the usage of the Dijkstra calls from the other method</span>
+    <span class="s0">public void </span><span class="s1">toggleDijkstra</span><span class="s2">() {</span>
+        <span class="s1">useBFS </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+        <span class="s1">useDFS </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+        <span class="s1">findPathBetweenPoints</span><span class="s2">();</span>
+    <span class="s2">}</span>
+    <span class="s4">//enables the usage of the DFS calls from the other method</span>
+    <span class="s0">public void </span><span class="s1">toggleDFS</span><span class="s2">(){</span>
+        <span class="s1">useBFS </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+        <span class="s1">useDFS </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+        <span class="s1">findPathBetweenPoints</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s4">//finds the paths between the certain points on the image</span>
+    <span class="s0">public void </span><span class="s1">findPathBetweenPoints</span><span class="s2">() {</span>
+        <span class="s4">//try catch for handling</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s4">//converts the original image into Black and white</span>
+            <span class="s1">Image bwImage </span><span class="s2">= </span><span class="s1">Processor</span><span class="s2">.</span><span class="s1">convertToBW</span><span class="s2">(</span><span class="s1">image</span><span class="s2">, </span><span class="s3">2.6</span><span class="s2">);</span>
+            <span class="s4">//it then creates graph nodes from the balck and white image.</span>
+            <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">Color</span><span class="s2">&gt;[] </span><span class="s1">nodes </span><span class="s2">= </span><span class="s1">Processor</span><span class="s2">.</span><span class="s1">createNodesFromBW</span><span class="s2">(</span><span class="s1">bwImage</span><span class="s2">);</span>
+
+            <span class="s4">//stores the paths from the algorithms</span>
+            <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">Color</span><span class="s2">&gt;&gt;&gt; </span><span class="s1">bfsRoute </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+            <span class="s4">//iterates throught the points lists to find the paths</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s3">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">points</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i </span><span class="s2">+= </span><span class="s3">2</span><span class="s2">) {</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">+ </span><span class="s3">2 </span><span class="s2">&gt;= </span><span class="s1">points</span><span class="s2">.</span><span class="s1">size</span><span class="s2">()) {</span>
+                    <span class="s0">continue</span><span class="s2">;</span>
+                <span class="s2">}</span>
+                <span class="s4">//gets the start and end points</span>
+                <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">Color</span><span class="s2">&gt; </span><span class="s1">start </span><span class="s2">= </span><span class="s1">Processor</span><span class="s2">.</span><span class="s1">getNodesOnMouseClick</span><span class="s2">(</span><span class="s1">bwImage</span><span class="s2">, </span><span class="s1">points</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">), </span><span class="s1">points</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i </span><span class="s2">+ </span><span class="s3">1</span><span class="s2">), </span><span class="s1">nodes</span><span class="s2">);</span>
+                <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">Color</span><span class="s2">&gt; </span><span class="s1">end </span><span class="s2">= </span><span class="s1">Processor</span><span class="s2">.</span><span class="s1">getNodesOnMouseClick</span><span class="s2">(</span><span class="s1">bwImage</span><span class="s2">, </span><span class="s1">points</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i </span><span class="s2">+ </span><span class="s3">2</span><span class="s2">), </span><span class="s1">points</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i </span><span class="s2">+ </span><span class="s3">3</span><span class="s2">), </span><span class="s1">nodes</span><span class="s2">);</span>
+
+                <span class="s1">Search search </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Search</span><span class="s2">(</span><span class="s1">start</span><span class="s2">, </span><span class="s1">end</span><span class="s2">);</span>
+
+                <span class="s4">//it then draws the route using the draw route method and sets the route on the image</span>
+                <span class="s0">if</span><span class="s2">(</span><span class="s1">useBFS</span><span class="s2">) {</span>
+                <span class="s1">search</span><span class="s2">.</span><span class="s1">BFS</span><span class="s2">();</span>
+                <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">useDFS</span><span class="s2">) {</span>
+                    <span class="s1">search</span><span class="s2">.</span><span class="s1">DFS</span><span class="s2">();</span>
+                <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                  <span class="s1">search</span><span class="s2">.</span><span class="s1">Dijkstra</span><span class="s2">(</span><span class="s1">nodes</span><span class="s2">);</span>
+                  <span class="s2">}</span>
+
+                <span class="s1">bfsRoute</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">search</span><span class="s2">.</span><span class="s1">getRoute</span><span class="s2">());</span>
+            <span class="s2">}</span>
+            <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">GraphNodeAL</span><span class="s2">&lt;?&gt;&gt; </span><span class="s1">total </span><span class="s2">= </span><span class="s1">Search</span><span class="s2">.</span><span class="s1">addNodePaths</span><span class="s2">(</span><span class="s1">bfsRoute</span><span class="s2">);</span>
+
+            <span class="s1">imageView</span><span class="s2">.</span><span class="s1">setImage</span><span class="s2">(</span><span class="s1">Processor</span><span class="s2">.</span><span class="s1">drawRoute</span><span class="s2">(</span><span class="s1">image</span><span class="s2">, </span><span class="s1">total</span><span class="s2">));</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">e</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s4">//creates an array of graph nodes with all the landmarks present on the image</span>
+    <span class="s0">public static </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt;[] </span><span class="s1">loadLandmarks</span><span class="s2">(){</span>
+        <span class="s4">//all the landmarks are pre-stored</span>
+        <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">eiffel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;&gt;(</span><span class="s5">&quot;Eiffel Tower&quot;</span><span class="s2">,</span><span class="s3">137</span><span class="s2">,</span><span class="s3">260</span><span class="s2">);</span>
+        <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">musee </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;&gt;(</span><span class="s5">&quot;Musee du Louvre&quot;</span><span class="s2">, </span><span class="s3">348</span><span class="s2">,</span><span class="s3">239</span><span class="s2">);</span>
+        <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">notre </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;&gt;(</span><span class="s5">&quot;Notre-Dame de Paris&quot;</span><span class="s2">, </span><span class="s3">418</span><span class="s2">,</span><span class="s3">296</span><span class="s2">);</span>
+        <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">tromphe </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;&gt;(</span><span class="s5">&quot;Arc de Tromphe&quot;</span><span class="s2">, </span><span class="s3">150</span><span class="s2">,</span><span class="s3">137</span><span class="s2">);</span>
+        <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">pantheon </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;&gt;(</span><span class="s5">&quot;Pantheon&quot;</span><span class="s2">, </span><span class="s3">412</span><span class="s2">, </span><span class="s3">373</span><span class="s2">);</span>
+        <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">sainte </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;&gt;(</span><span class="s5">&quot;Sainte-Chapelle&quot;</span><span class="s2">, </span><span class="s3">407</span><span class="s2">, </span><span class="s3">290</span><span class="s2">);</span>
+        <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">garnier </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;&gt;(</span><span class="s5">&quot;Palais Garnier&quot;</span><span class="s2">, </span><span class="s3">337</span><span class="s2">, </span><span class="s3">162</span><span class="s2">);</span>
+        <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">concorde </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;&gt;(</span><span class="s5">&quot;Place de la Concorde&quot;</span><span class="s2">, </span><span class="s3">277</span><span class="s2">, </span><span class="s3">203</span><span class="s2">);</span>
+        <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">invalides </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GraphNodeAL</span><span class="s2">&lt;&gt;(</span><span class="s5">&quot;Hotel des Invalides&quot;</span><span class="s2">, </span><span class="s3">237</span><span class="s2">, </span><span class="s3">264</span><span class="s2">);</span>
+
+        <span class="s4">//creates the string objects with the landmarks</span>
+        <span class="s1">GraphNodeAL</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt;[] </span><span class="s1">landmarks </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GraphNodeAL</span><span class="s2">[</span><span class="s3">9</span><span class="s2">];</span>
+
+        <span class="s4">//each landmark is assigned with an index</span>
+        <span class="s1">landmarks</span><span class="s2">[</span><span class="s3">0</span><span class="s2">] = </span><span class="s1">eiffel</span><span class="s2">;</span>
+        <span class="s1">landmarks</span><span class="s2">[</span><span class="s3">1</span><span class="s2">] = </span><span class="s1">musee</span><span class="s2">;</span>
+        <span class="s1">landmarks</span><span class="s2">[</span><span class="s3">2</span><span class="s2">] = </span><span class="s1">notre</span><span class="s2">;</span>
+        <span class="s1">landmarks</span><span class="s2">[</span><span class="s3">3</span><span class="s2">] = </span><span class="s1">tromphe</span><span class="s2">;</span>
+        <span class="s1">landmarks</span><span class="s2">[</span><span class="s3">4</span><span class="s2">] = </span><span class="s1">pantheon</span><span class="s2">;</span>
+        <span class="s1">landmarks</span><span class="s2">[</span><span class="s3">5</span><span class="s2">] = </span><span class="s1">sainte</span><span class="s2">;</span>
+        <span class="s1">landmarks</span><span class="s2">[</span><span class="s3">6</span><span class="s2">] = </span><span class="s1">garnier</span><span class="s2">;</span>
+        <span class="s1">landmarks</span><span class="s2">[</span><span class="s3">7</span><span class="s2">] = </span><span class="s1">concorde</span><span class="s2">;</span>
+        <span class="s1">landmarks</span><span class="s2">[</span><span class="s3">8</span><span class="s2">] = </span><span class="s1">invalides</span><span class="s2">;</span>
+
+        <span class="s4">//connections are made with the landmarks</span>
+        <span class="s1">eiffel</span><span class="s2">.</span><span class="s1">connectToNodeUndirected</span><span class="s2">(</span><span class="s1">tromphe</span><span class="s2">, </span><span class="s3">10</span><span class="s2">);</span>
+        <span class="s1">musee</span><span class="s2">.</span><span class="s1">connectToNodeUndirected</span><span class="s2">(</span><span class="s1">garnier</span><span class="s2">,</span><span class="s3">10</span><span class="s2">);</span>
+        <span class="s1">notre</span><span class="s2">.</span><span class="s1">connectToNodeUndirected</span><span class="s2">(</span><span class="s1">sainte</span><span class="s2">,</span><span class="s3">10</span><span class="s2">);</span>
+        <span class="s1">pantheon</span><span class="s2">.</span><span class="s1">connectToNodeUndirected</span><span class="s2">(</span><span class="s1">sainte</span><span class="s2">,</span><span class="s3">10</span><span class="s2">);</span>
+        <span class="s1">sainte</span><span class="s2">.</span><span class="s1">connectToNodeUndirected</span><span class="s2">(</span><span class="s1">garnier</span><span class="s2">,</span><span class="s3">10</span><span class="s2">);</span>
+        <span class="s1">garnier</span><span class="s2">.</span><span class="s1">connectToNodeUndirected</span><span class="s2">(</span><span class="s1">invalides</span><span class="s2">,</span><span class="s3">10</span><span class="s2">);</span>
+        <span class="s1">concorde</span><span class="s2">.</span><span class="s1">connectToNodeUndirected</span><span class="s2">(</span><span class="s1">musee</span><span class="s2">,</span><span class="s3">10</span><span class="s2">);</span>
+        <span class="s1">invalides</span><span class="s2">.</span><span class="s1">connectToNodeUndirected</span><span class="s2">(</span><span class="s1">eiffel</span><span class="s2">,</span><span class="s3">10</span><span class="s2">);</span>
+
+        <span class="s4">//the array is returned with the landmark nodes</span>
+        <span class="s0">return </span><span class="s1">landmarks</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s4">//redundant method not in use anymore but used to get the X and y of locations</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private void </span><span class="s1">imageClickXY</span><span class="s2">(</span><span class="s1">MouseEvent event</span><span class="s2">) {</span>
+        <span class="s0">double </span><span class="s1">x </span><span class="s2">= </span><span class="s1">event</span><span class="s2">.</span><span class="s1">getX</span><span class="s2">();</span>
+        <span class="s0">double </span><span class="s1">y </span><span class="s2">= </span><span class="s1">event</span><span class="s2">.</span><span class="s1">getY</span><span class="s2">();</span>
+        <span class="s0">int </span><span class="s1">roundedX </span><span class="s2">= (</span><span class="s0">int</span><span class="s2">) (</span><span class="s1">x </span><span class="s2">/ </span><span class="s1">imageView</span><span class="s2">.</span><span class="s1">getBoundsInLocal</span><span class="s2">().</span><span class="s1">getWidth</span><span class="s2">() );</span>
+        <span class="s0">int </span><span class="s1">roundedY </span><span class="s2">= (</span><span class="s0">int</span><span class="s2">) (</span><span class="s1">y </span><span class="s2">/ </span><span class="s1">imageView</span><span class="s2">.</span><span class="s1">getBoundsInLocal</span><span class="s2">().</span><span class="s1">getHeight</span><span class="s2">());</span>
+        <span class="s0">int </span><span class="s1">imageWidth </span><span class="s2">= (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">imageView</span><span class="s2">.</span><span class="s1">getBoundsInLocal</span><span class="s2">().</span><span class="s1">getWidth</span><span class="s2">();</span>
+        <span class="s0">int </span><span class="s1">imageHeight </span><span class="s2">= (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">imageView</span><span class="s2">.</span><span class="s1">getBoundsInLocal</span><span class="s2">().</span><span class="s1">getHeight</span><span class="s2">();</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">roundedX </span><span class="s2">&gt;=</span><span class="s3">0 </span><span class="s2">&amp;&amp; </span><span class="s1">roundedX </span><span class="s2">&lt; </span><span class="s1">imageWidth </span><span class="s2">&amp;&amp; </span><span class="s1">roundedY </span><span class="s2">&gt;=</span><span class="s3">0 </span><span class="s2">&amp;&amp; </span><span class="s1">roundedY </span><span class="s2">&lt; </span><span class="s1">imageHeight </span><span class="s2">){</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s5">&quot;Mouse clicked at: ( &quot; </span><span class="s2">+ </span><span class="s1">x </span><span class="s2">+ </span><span class="s5">&quot;, &quot; </span><span class="s2">+ </span><span class="s1">y </span><span class="s2">+ </span><span class="s5">&quot;)&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s4">//loads all the landmarks onto the image and puts a purple circle onto</span>
+    <span class="s0">public void </span><span class="s1">addLandmarks</span><span class="s2">(){</span>
+        <span class="s1">Circle</span><span class="s2">[] </span><span class="s1">landmarks </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Circle</span><span class="s2">[</span><span class="s1">loadLandmarks</span><span class="s2">().</span><span class="s1">length</span><span class="s2">];</span>
+
+        <span class="s0">for</span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s3">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">loadLandmarks</span><span class="s2">().</span><span class="s1">length</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++){</span>
+            <span class="s1">landmarks</span><span class="s2">[</span><span class="s1">i</span><span class="s2">] = </span><span class="s0">new </span><span class="s1">Circle</span><span class="s2">(</span><span class="s1">loadLandmarks</span><span class="s2">()[</span><span class="s1">i</span><span class="s2">].</span><span class="s1">getX</span><span class="s2">(), </span><span class="s1">loadLandmarks</span><span class="s2">()[</span><span class="s1">i</span><span class="s2">].</span><span class="s1">getY</span><span class="s2">(), </span><span class="s3">3</span><span class="s2">,</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">PURPLE</span><span class="s2">);</span>
+            <span class="s2">((</span><span class="s1">Pane</span><span class="s2">) </span><span class="s1">imageView</span><span class="s2">.</span><span class="s1">getParent</span><span class="s2">()).</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">landmarks</span><span class="s2">[</span><span class="s1">i</span><span class="s2">]);</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+    <span class="s4">// Exists the system</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private void </span><span class="s1">exit</span><span class="s2">(){</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">exit</span><span class="s2">(</span><span class="s3">0</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+
+<span class="s2">}</span></pre>
+</body>
+</html>
